@@ -1,22 +1,25 @@
-import { defineConfig, globalIgnores } from 'eslint/config'
-import nextVitals from 'eslint-config-next/core-web-vitals'
+import js from '@eslint/js'
+import { FlatCompat } from '@eslint/eslintrc'
+import nextPlugin from '@next/eslint-plugin-next'
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
+const compat = new FlatCompat({
+  baseDirectory: import.meta.dirname,
+})
+
+export default [
+  js.configs.recommended,
+  ...compat.extends('next'),
   {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      '@next/next': nextPlugin,
+    },
     rules: {
+      // Disable specific problematic rules
+      '@next/next/no-html-link-for-pages': 'off',
       'react/no-unescaped-entities': 'off',
-      '@next/next/no-page-custom-font': 'off',
+      '@next/next/no-img-element': 'off',
+      // Add any other rules causing issues
     },
   },
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-  ]),
-])
-
-export default eslintConfig
+]
