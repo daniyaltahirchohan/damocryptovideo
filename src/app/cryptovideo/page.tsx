@@ -1,7 +1,6 @@
 "use client"
-import { useState, useRef, useEffect, useEffectEvent } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Buffer } from "buffer"
-import { buffer } from "stream/consumers"
 
 export default function CryptoVideo() {
 
@@ -14,7 +13,7 @@ export default function CryptoVideo() {
     const encFileRef = useRef<HTMLInputElement>(null)
 
     const textToBase64 = (buf: ArrayBuffer) => Buffer.from(buf).toString("base64")
-    const base64Totext = (b64: string) => Buffer.from(b64, "base64").buffer
+    //const base64Totext = (b64: string) => Buffer.from(b64, "base64").buffer
 
 
     const driveKey = async (password: string, salt: ArrayBuffer) => {
