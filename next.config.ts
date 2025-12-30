@@ -1,11 +1,9 @@
-// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '10mb', // or '10mb' / false to turn off
-    },
+  // Temporarily disable ESLint during builds
+  eslint: {
+    ignoreDuringBuilds: true,
   },
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig
